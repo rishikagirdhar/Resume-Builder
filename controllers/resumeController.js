@@ -47,9 +47,11 @@ exports.updateResume = async (req, res) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    Object.assign(resume, req.body); // Update resume with request data
-    await resume.save(); // Save changes to the database
-    res.json(resume); // Respond with updated resume
+    // Update only specific fields
+    const updatedFields = req.body;
+    await Resume.findByIdAndUpdate(req.params.id, updatedFields, { new: true });
+
+    res.json(await Resume.findById(req.params.id)); // Respond with updated resume
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });

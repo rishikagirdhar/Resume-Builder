@@ -26,11 +26,10 @@ router.post(
 // Get Resume by ID
 router.get(
   '/:id',
-  updateResumeValidation, // Apply validation rules for getting a resume by ID
   (req, res, next) => {
-    const errors = validationResult(req); // Check for validation errors
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() }); // Respond with errors if validation fails
+    // Validation for ID parameter
+    if (!req.params.id) {
+      return res.status(400).json({ errors: [{ msg: 'Resume ID is required' }] });
     }
     next(); // Proceed to the next middleware or route handler
   },
@@ -54,11 +53,10 @@ router.put(
 // Delete Resume
 router.delete(
   '/:id',
-  updateResumeValidation, // Apply validation rules for deleting a resume
   (req, res, next) => {
-    const errors = validationResult(req); // Check for validation errors
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() }); // Respond with errors if validation fails
+    // Validation for ID parameter
+    if (!req.params.id) {
+      return res.status(400).json({ errors: [{ msg: 'Resume ID is required' }] });
     }
     next(); // Proceed to the next middleware or route handler
   },

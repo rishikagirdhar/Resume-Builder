@@ -53,3 +53,4 @@ node_modules/
 # Miscellaneous
 .DS_Store
 .env
+/controller

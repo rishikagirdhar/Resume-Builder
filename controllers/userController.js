@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken'); // Import JWT for generating tokens
 
 // Handle user signup
 exports.signup = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, confirmPassword } = req.body; // Destructure confirmPassword
 
   try {
     // Check if the user already exists
@@ -13,7 +13,7 @@ exports.signup = async (req, res) => {
     }
 
     // Create a new user instance
-    user = new User({ email, password });
+    user = new User({ email, password, confirmPassword }); // Include confirmPassword
     await user.save();
 
     // Create JWT payload
